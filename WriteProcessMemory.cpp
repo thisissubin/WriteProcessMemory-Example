@@ -6,24 +6,24 @@ int main() {
     DWORD Pointer = 0x0;    //CE Address
     DWORD offset = 0x0;     //CE Pointer
     int Value = 0; // Value
-    HWND hWND = FindWindow(0, "Tutorial-x86_64"); // or name-ProcessPath   name = process
+    HWND hWND = FindWindow(0, "name"); // or name-ProcessPath   name = process
     if (hWND == 0x00) {
-        std::cerr << "ÇÁ·Î¼¼½º¸¦ Ã£À»¼ö ¾ø½À´Ï´Ù." << std::endl;
+        std::cerr << "í”„ë¡œì„¸ìŠ¤ë¥¼ ì°¾ì„ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << std::endl;
     }
     else {
         DWORD pId;
         GetWindowThreadProcessId(hWND, &pId);
         HANDLE pVictim = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pId);
         if (!pVictim) {
-            std::cerr << "ÇÁ·Î¼¼½º ¿¡·¯." << std::endl;
+            std::cerr << "í”„ë¡œì„¸ìŠ¤ ì—ëŸ¬." << std::endl;
         }
         else {
             int result = WriteProcessMemory(pVictim, (LPVOID)(Pointer+offset), &Value, (DWORD)sizeof(Value), nullptr);
             if (result > 0x00) {
-                std::clog << "°ª¹Ù²Ù±â: ¼º°ø." << std::endl;
+                std::clog << "ê°’ë°”ê¾¸ê¸°: ì„±ê³µ." << std::endl;
             }
             else {
-                std::cerr << "°ª¹Ù²Ù±â: ¿¡·¯." << std::endl;
+                std::cerr << "ê°’ë°”ê¾¸ê¸°: ì—ëŸ¬." << std::endl;
             }
             CloseHandle(pVictim);
         }
