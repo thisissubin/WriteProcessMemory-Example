@@ -13,19 +13,19 @@ int main() {
     else {
         DWORD pId;
         GetWindowThreadProcessId(hWND, &pId);
-        HANDLE hWND = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pId);
-        if (!pVictim) {
+        HANDLE hANDLE = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pId);
+        if (!hANDLE) {
             std::cerr << "프로세스 에러." << std::endl;
         }
         else {
-            int result = WriteProcessMemory(hWND, (LPVOID)(Pointer+offset), &Value, (DWORD)sizeof(Value), nullptr);
+            int result = WriteProcessMemory(hANDLE, (LPVOID)(Pointer+offset), &Value, (DWORD)sizeof(Value), nullptr);
             if (result > 0x00) {
                 std::clog << "값바꾸기: 성공." << std::endl;
             }
             else {
                 std::cerr << "값바꾸기: 에러." << std::endl;
             }
-            CloseHandle(hWND);
+            CloseHandle(hANDLE);
         }
     } _getch();
     return 0x00;
